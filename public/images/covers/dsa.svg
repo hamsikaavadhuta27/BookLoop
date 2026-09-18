@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="560">
+  <rect width="400" height="560" fill="#1f3a5f"/>
+  <text x="200" y="250" text-anchor="middle" font-family="Georgia" font-size="28" fill="#f6efe4">Data Structures</text>
+  <text x="200" y="295" text-anchor="middle" font-family="Georgia" font-size="20" fill="#c9d7ea">Using C</text>
+</svg>

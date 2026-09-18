@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="560">
+  <rect width="400" height="560" fill="#4a6741"/>
+  <text x="200" y="250" text-anchor="middle" font-family="Georgia" font-size="26" fill="#f6efe4">Intermediate</text>
+  <text x="200" y="295" text-anchor="middle" font-family="Georgia" font-size="26" fill="#f6efe4">Physics</text>
+</svg>

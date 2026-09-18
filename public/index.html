@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookLoop — Give every book another loop</title>
+  <link rel="icon" href="images/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="images/logo.svg" alt="">
+        <span>
+          <span class="brand-name">BookLoop</span>
+          <span class="brand-tag">Give every book another loop.</span>
+        </span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu">Menu</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" data-nav="home">Home</a></li>
+        <li><a href="books.html" data-nav="browse">Browse Books</a></li>
+        <li><a class="nav-cta" href="sell.html" data-nav="sell">Sell a Book</a></li>
+        <li><a href="login.html" data-nav="login">Login</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow">Hyderabad student marketplace</p>
+          <h1>Give every book another loop.</h1>
+          <p class="lead">Buy and sell used college books with students near Koti, Ameerpet, Madhapur, and more. Keep textbooks moving instead of stacking them in a cupboard.</p>
+          <form class="search-box" id="home-search-form">
+            <input id="home-search-input" type="search" name="search" placeholder="Search by title or author, e.g. Java" aria-label="Search books">
+            <button class="btn btn-primary" type="submit">Search</button>
+          </form>
+        </div>
+        <aside class="hero-card">
+          <h3>Built for campus life</h3>
+          <p class="muted">List a book with photo, condition, and pickup area. Another student finds it, checks the details, and contacts you.</p>
+          <div class="stat-row">
+            <div class="stat"><strong>Used books</strong><span>Fair prices</span></div>
+            <div class="stat"><strong>Local pickup</strong><span>Hyderabad</span></div>
+            <div class="stat"><strong>Students</strong><span>B.Tech to MBBS</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Browse categories</h2>
+            <p>Academic first, plus fiction and exam prep. More categories can be added later.</p>
+          </div>
+          <a href="books.html">See all books</a>
+        </div>
+        <div class="category-grid" id="category-grid"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Recently added</h2>
+            <p>Fresh listings from students around the city.</p>
+          </div>
+          <a href="books.html">Browse Books</a>
+        </div>
+        <div class="book-grid" id="featured-grid"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Hyderabad pickup spots</h2>
+            <p>Filter books by the area where you can meet.</p>
+          </div>
+        </div>
+        <div class="location-grid" id="location-grid"></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="cta-banner">
+          <div>
+            <h2>Finished a semester?</h2>
+            <p>Pass the book on. Listing takes a few minutes.</p>
+          </div>
+          <a class="btn" href="sell.html">Sell a Book</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>BookLoop</h3>
+        <p>Give every book another loop. A student marketplace starting in Hyderabad, India.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="books.html">Browse Books</a></li>
+          <li><a href="sell.html">Sell a Book</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Account</h3>
+        <ul>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="signup.html">Signup</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container"><p>© <span id="year"></span> BookLoop</p></div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

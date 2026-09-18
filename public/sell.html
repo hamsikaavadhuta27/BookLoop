@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sell a Book — BookLoop</title>
+  <link rel="icon" href="images/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="sell">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="images/logo.svg" alt="">
+        <span>
+          <span class="brand-name">BookLoop</span>
+          <span class="brand-tag">Give every book another loop.</span>
+        </span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu">Menu</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" data-nav="home">Home</a></li>
+        <li><a href="books.html" data-nav="browse">Browse Books</a></li>
+        <li><a class="nav-cta" href="sell.html" data-nav="sell">Sell a Book</a></li>
+        <li><a href="login.html" data-nav="login">Login</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="form-wrap">
+      <h1>Sell a Book</h1>
+      <p class="muted">Tell students what you have, the condition, the price, and where they can meet you in Hyderabad.</p>
+
+      <div class="form-success" id="sell-success">
+        <h2>Listing posted</h2>
+        <p>Your book is now in Browse Books.</p>
+        <p><a class="btn btn-primary" id="new-book-link" href="books.html">View this listing</a></p>
+        <p><a href="sell.html">Sell another book</a></p>
+      </div>
+
+      <form id="sell-form">
+        <div class="field">
+          <label for="sell-title">Book name</label>
+          <input id="sell-title" name="title" type="text" required maxlength="120">
+        </div>
+        <div class="field">
+          <label for="sell-author">Author</label>
+          <input id="sell-author" name="author" type="text" required maxlength="80">
+        </div>
+        <div class="field">
+          <label for="sell-edition">Edition</label>
+          <input id="sell-edition" name="edition" type="text" maxlength="40" placeholder="e.g. 12th Edition">
+        </div>
+        <div class="field">
+          <label for="sell-category">Category</label>
+          <select id="sell-category" name="category" required></select>
+        </div>
+        <div class="field">
+          <label for="sell-branch">Branch / course</label>
+          <select id="sell-branch" name="branch"></select>
+        </div>
+        <div class="field">
+          <label for="sell-year">Year / semester</label>
+          <select id="sell-year" name="year"></select>
+        </div>
+        <div class="field">
+          <label for="sell-condition">Condition</label>
+          <select id="sell-condition" name="condition" required></select>
+        </div>
+        <div class="field">
+          <label for="sell-price">Price (₹)</label>
+          <input id="sell-price" name="price" type="number" min="1" step="1" required>
+        </div>
+        <div class="field">
+          <label for="sell-location">Location</label>
+          <select id="sell-location" name="location" required></select>
+        </div>
+        <div class="field">
+          <label for="sell-description">Description</label>
+          <textarea id="sell-description" name="description" maxlength="1000" placeholder="Highlighting, missing pages, pickup notes…"></textarea>
+        </div>
+        <div class="field">
+          <label for="sell-image">Book image</label>
+          <input id="sell-image" name="image" type="file" accept="image/*">
+        </div>
+        <div class="field">
+          <label for="sell-seller-name">Your name</label>
+          <input id="sell-seller-name" name="sellerName" type="text" required maxlength="60">
+        </div>
+        <div class="field">
+          <label for="sell-seller-email">Email</label>
+          <input id="sell-seller-email" name="sellerEmail" type="email" placeholder="optional for now">
+        </div>
+        <div class="field">
+          <label for="sell-seller-contact">Phone / contact</label>
+          <input id="sell-seller-contact" name="sellerContact" type="text" maxlength="20">
+        </div>
+        <p class="error-text" id="sell-error"></p>
+        <button class="btn btn-clay btn-full" type="submit">Post listing</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>BookLoop</h3>
+        <p>Give every book another loop.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="books.html">Browse Books</a></li>
+          <li><a href="sell.html">Sell a Book</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Account</h3>
+        <ul>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="signup.html">Signup</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container"><p>© <span id="year"></span> BookLoop</p></div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/sell.js"></script>
+</body>
+</html>

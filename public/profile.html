@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile — BookLoop</title>
+  <link rel="icon" href="images/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="login">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <img class="brand-mark" src="images/logo.svg" alt="">
+        <span>
+          <span class="brand-name">BookLoop</span>
+          <span class="brand-tag">Give every book another loop.</span>
+        </span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu">Menu</button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html" data-nav="home">Home</a></li>
+        <li><a href="books.html" data-nav="browse">Browse Books</a></li>
+        <li><a class="nav-cta" href="sell.html" data-nav="sell">Sell a Book</a></li>
+        <li><a href="login.html" data-nav="login">Login</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="auth-wrap">
+      <div class="notice">You are not logged in. User accounts are a future backend feature.</div>
+      <h1>Your profile</h1>
+      <p>Later this page will show:</p>
+      <ul>
+        <li>Your name and pickup area</li>
+        <li>Books you listed for sale</li>
+        <li>Books you saved</li>
+        <li>Logout</li>
+      </ul>
+      <p class="muted">The Save button on listings already stores favourite IDs in this browser, only so you can practise the idea. It is not tied to an account.</p>
+      <p><a class="btn btn-primary" href="login.html">Go to login UI</a> <a class="btn btn-ghost" href="books.html">Browse Books</a></p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container"><p>© <span id="year"></span> BookLoop</p></div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
