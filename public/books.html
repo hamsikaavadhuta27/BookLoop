@@ -36,45 +36,58 @@
       <div class="section-head">
         <div>
           <h1>Browse used books</h1>
-          <p>Search by title or author, then combine filters. Nothing reloads the page.</p>
+          <p>Search by title, author, branch, or area. Combine filters seamlessly.</p>
         </div>
       </div>
 
       <div class="search-box" style="max-width:640px;margin-bottom:22px;">
-        <input id="search-input" type="search" placeholder="Try Java, Anatomy, or Harry Potter" aria-label="Search by title or author">
+        <input id="search-input" type="search" placeholder="Try Java, DBMS, Anatomy, or Harry Potter" aria-label="Search by title or author">
       </div>
 
       <div class="browse-layout">
-        <form class="filters panel" id="filter-form">
-          <h2>Filters</h2>
+        <form class="filters" id="filter-form">
+          <h2>
+            <span>Filters</span>
+            <button class="btn btn-ghost" style="padding: 4px 10px; font-size: 0.8rem;" type="reset">Clear</button>
+          </h2>
+
           <div class="field">
             <label for="filter-category">Category</label>
             <select id="filter-category" name="category"></select>
           </div>
+
           <div class="field">
             <label for="filter-branch">Branch / course</label>
             <select id="filter-branch" name="branch"></select>
+            <input type="text" id="custom-branch-input" class="custom-other-input" placeholder="Type custom branch (e.g. AI/ML, Biotech)">
           </div>
+
           <div class="field">
             <label for="filter-year">Year / semester</label>
             <select id="filter-year" name="year"></select>
+            <input type="text" id="custom-year-input" class="custom-other-input" placeholder="Type custom year/semester">
           </div>
+
           <div class="field">
-            <label for="filter-location">Location</label>
+            <label for="filter-location">Hyderabad Location</label>
             <select id="filter-location" name="location"></select>
+            <input type="text" id="custom-location-input" class="custom-other-input" placeholder="Type custom location area">
           </div>
+
           <div class="field">
             <label for="filter-condition">Condition</label>
             <select id="filter-condition" name="condition"></select>
           </div>
+
           <div class="field">
-            <span>Price (₹)</span>
+            <label>Price Range (₹)</label>
             <div class="price-fields">
-              <input id="filter-min-price" type="number" min="0" placeholder="Min" aria-label="Minimum price">
-              <input id="filter-max-price" type="number" min="0" placeholder="Max" aria-label="Maximum price">
+              <input id="filter-min-price" type="number" min="0" placeholder="Min ₹" aria-label="Minimum price">
+              <input id="filter-max-price" type="number" min="0" placeholder="Max ₹" aria-label="Maximum price">
             </div>
           </div>
-          <button class="btn btn-ghost btn-full" type="reset">Clear Filters</button>
+
+          <button class="btn btn-ghost btn-full" style="margin-top: 10px;" type="reset">Reset All Filters</button>
         </form>
 
         <div>
@@ -83,8 +96,8 @@
           </div>
           <div class="book-grid" id="book-grid"></div>
           <div class="empty-state hidden" id="empty-state">
-            <h3>No books found</h3>
-            <p>Try another search, or clear the filters.</p>
+            <h3>No books found matching your filters</h3>
+            <p>Try adjusting your search terms, removing price bounds, or clearing filters.</p>
           </div>
         </div>
       </div>
@@ -116,6 +129,57 @@
     </div>
     <div class="container"><p>© <span id="year"></span> BookLoop</p></div>
   </footer>
+
+  <!-- Private Chat Modal -->
+  <div class="modal-overlay" id="chat-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div>
+          <h3 id="chat-book-title">Chat with Seller</h3>
+          <p id="chat-seller-name" style="font-size: 0.8rem; color: var(--muted); margin: 2px 0 0;">Seller</p>
+        </div>
+        <button class="modal-close-btn" id="chat-close-btn">&times;</button>
+      </div>
+      <div class="chat-banner">
+        🔒 <strong>Private Message:</strong> Coordinate safe pickup and ask questions.
+      </div>
+      <div class="chat-messages" id="chat-messages-container"></div>
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Type a message to the seller...">
+        <button class="chat-send-btn" id="chat-send-btn">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BookLoop AI Assistant Floating Widget -->
+  <div class="ai-chatbot-widget">
+    <button class="ai-toggle-btn" id="ai-toggle-btn" aria-label="Open BookLoop AI">
+      <span class="ai-pulse-dot"></span>
+      🤖 BookLoop AI
+    </button>
+    <div class="ai-chat-window" id="ai-chat-window">
+      <div class="ai-chat-header">
+        <div>
+          <h4>🤖 BookLoop Assistant</h4>
+        </div>
+        <button class="modal-close-btn" id="ai-close-btn" style="color:white;">&times;</button>
+      </div>
+      <div class="ai-chat-body" id="ai-chat-body">
+        <div class="ai-msg bot">
+          👋 Hi! Need help finding a book or choosing the right filters? Ask me!
+          <div class="ai-quick-prompts">
+            <button type="button" class="ai-prompt-chip" data-prompt="Find CSE books under 400 in Kukatpally">💻 CSE under ₹400</button>
+            <button type="button" class="ai-prompt-chip" data-prompt="Show fiction novels">📚 Fiction books</button>
+            <button type="button" class="ai-prompt-chip" data-prompt="How do I sell a book?">📝 How to sell?</button>
+          </div>
+        </div>
+      </div>
+      <div class="ai-input-area">
+        <input type="text" id="ai-input" placeholder="Ask e.g. 'Books in Ameerpet'...">
+        <button class="ai-send-btn" id="ai-send-btn">Send</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/data.js"></script>
   <script src="js/api.js"></script>

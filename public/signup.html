@@ -33,36 +33,65 @@
 
   <main id="main">
     <div class="auth-wrap">
-      <div class="notice">Future backend feature: this form does not create an account. Nothing is saved to the database yet.</div>
+      <div class="notice">Future backend feature: this form is a design preview. User registration and secure database accounts will be connected in a later phase.</div>
       <h1>Signup</h1>
-      <p class="muted">The fields below show what a real student account will collect later.</p>
+      <p class="muted">Student accounts will let you list books, chat with buyers, and save favorite textbooks.</p>
       <form id="signup-form">
         <div class="field">
           <label for="signup-name">Full name</label>
-          <input id="signup-name" type="text" required>
+          <input id="signup-name" type="text" required placeholder="e.g. Rahul Sharma">
         </div>
         <div class="field">
           <label for="signup-email">Email</label>
-          <input id="signup-email" type="email" autocomplete="username" required>
+          <input id="signup-email" type="email" autocomplete="username" required placeholder="student@example.com">
         </div>
         <div class="field">
           <label for="signup-password">Password</label>
-          <input id="signup-password" type="password" autocomplete="new-password" required minlength="8">
+          <input id="signup-password" type="password" autocomplete="new-password" required minlength="8" placeholder="••••••••">
         </div>
         <div class="field">
-          <label for="signup-location">Usual pickup area</label>
-          <input id="signup-location" type="text" placeholder="e.g. Ameerpet">
+          <label for="signup-location">Usual pickup area (Hyderabad)</label>
+          <input id="signup-location" type="text" placeholder="e.g. Ameerpet / Kukatpally">
         </div>
         <p class="notice hidden" id="signup-message"></p>
-        <button class="btn btn-primary btn-full" type="submit">Create account (UI only)</button>
+        <button class="btn btn-primary btn-full" type="submit">Create account (Preview)</button>
       </form>
-      <p>Already have a design preview? <a href="login.html">Go to login</a></p>
+      <p style="margin-top: 16px;">Already have an account preview? <a href="login.html">Go to login</a></p>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container"><p>© <span id="year"></span> BookLoop</p></div>
   </footer>
+
+  <!-- BookLoop AI Assistant Floating Widget -->
+  <div class="ai-chatbot-widget">
+    <button class="ai-toggle-btn" id="ai-toggle-btn" aria-label="Open BookLoop AI">
+      <span class="ai-pulse-dot"></span>
+      🤖 BookLoop AI
+    </button>
+    <div class="ai-chat-window" id="ai-chat-window">
+      <div class="ai-chat-header">
+        <div>
+          <h4>🤖 BookLoop Assistant</h4>
+        </div>
+        <button class="modal-close-btn" id="ai-close-btn" style="color:white;">&times;</button>
+      </div>
+      <div class="ai-chat-body" id="ai-chat-body">
+        <div class="ai-msg bot">
+          👋 Hi! Have questions about signing up or using BookLoop?
+          <div class="ai-quick-prompts">
+            <button type="button" class="ai-prompt-chip" data-prompt="What is BookLoop?">❓ About BookLoop</button>
+            <button type="button" class="ai-prompt-chip" data-prompt="How do I sell a book?">📝 How to sell</button>
+          </div>
+        </div>
+      </div>
+      <div class="ai-input-area">
+        <input type="text" id="ai-input" placeholder="Ask AI...">
+        <button class="ai-send-btn" id="ai-send-btn">Send</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/data.js"></script>
   <script src="js/api.js"></script>

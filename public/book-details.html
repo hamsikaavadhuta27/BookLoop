@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book details — BookLoop</title>
+  <title>Book Details — BookLoop</title>
   <link rel="icon" href="images/logo.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,7 +33,7 @@
 
   <main id="main" class="section">
     <div class="container" id="details-root">
-      <p class="muted">Loading book…</p>
+      <p class="muted">Loading book details…</p>
     </div>
   </main>
 
@@ -62,6 +62,56 @@
     </div>
     <div class="container"><p>© <span id="year"></span> BookLoop</p></div>
   </footer>
+
+  <!-- Private Chat Modal -->
+  <div class="modal-overlay" id="chat-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div>
+          <h3 id="chat-book-title">Chat with Seller</h3>
+          <p id="chat-seller-name" style="font-size: 0.8rem; color: var(--muted); margin: 2px 0 0;">Seller</p>
+        </div>
+        <button class="modal-close-btn" id="chat-close-btn">&times;</button>
+      </div>
+      <div class="chat-banner">
+        🔒 <strong>Private Message:</strong> Coordinate safe pickup and ask questions.
+      </div>
+      <div class="chat-messages" id="chat-messages-container"></div>
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Type a message to the seller...">
+        <button class="chat-send-btn" id="chat-send-btn">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BookLoop AI Assistant Floating Widget -->
+  <div class="ai-chatbot-widget">
+    <button class="ai-toggle-btn" id="ai-toggle-btn" aria-label="Open BookLoop AI">
+      <span class="ai-pulse-dot"></span>
+      🤖 BookLoop AI
+    </button>
+    <div class="ai-chat-window" id="ai-chat-window">
+      <div class="ai-chat-header">
+        <div>
+          <h4>🤖 BookLoop Assistant</h4>
+        </div>
+        <button class="modal-close-btn" id="ai-close-btn" style="color:white;">&times;</button>
+      </div>
+      <div class="ai-chat-body" id="ai-chat-body">
+        <div class="ai-msg bot">
+          👋 Hi! Have questions about this book or other recommendations?
+          <div class="ai-quick-prompts">
+            <button type="button" class="ai-prompt-chip" data-prompt="How do I buy a book?">💡 Buying tips</button>
+            <button type="button" class="ai-prompt-chip" data-prompt="Find other books in Hyderabad">📍 Other books</button>
+          </div>
+        </div>
+      </div>
+      <div class="ai-input-area">
+        <input type="text" id="ai-input" placeholder="Ask AI...">
+        <button class="ai-send-btn" id="ai-send-btn">Send</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/data.js"></script>
   <script src="js/api.js"></script>

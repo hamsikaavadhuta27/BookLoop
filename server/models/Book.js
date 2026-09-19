@@ -43,7 +43,7 @@ const bookSchema = new mongoose.Schema(
     condition: {
       type: String,
       required: [true, 'Condition is required'],
-      enum: ['Like New', 'Good', 'Fair', 'Acceptable']
+      enum: ['New', 'Like New', 'Very Good', 'Good', 'Fair', 'Acceptable', 'Used']
     },
     price: {
       type: Number,

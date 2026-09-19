@@ -37,71 +37,74 @@
       <p class="muted">Tell students what you have, the condition, the price, and where they can meet you in Hyderabad.</p>
 
       <div class="form-success" id="sell-success">
-        <h2>Listing posted</h2>
-        <p>Your book is now in Browse Books.</p>
-        <p><a class="btn btn-primary" id="new-book-link" href="books.html">View this listing</a></p>
-        <p><a href="sell.html">Sell another book</a></p>
+        <h2>🎉 Listing posted successfully!</h2>
+        <p>Your book is now live in Browse Books for students across Hyderabad to see.</p>
+        <p style="margin-top: 14px;"><a class="btn btn-primary" id="new-book-link" href="books.html">View this listing</a></p>
+        <p style="margin-top: 10px;"><a href="sell.html">Sell another book</a></p>
       </div>
 
       <form id="sell-form">
         <div class="field">
-          <label for="sell-title">Book name</label>
-          <input id="sell-title" name="title" type="text" required maxlength="120">
+          <label for="sell-title">Book Name *</label>
+          <input id="sell-title" name="title" type="text" required maxlength="120" placeholder="e.g. Database System Concepts, Atomic Habits">
         </div>
         <div class="field">
-          <label for="sell-author">Author</label>
-          <input id="sell-author" name="author" type="text" required maxlength="80">
+          <label for="sell-author">Author *</label>
+          <input id="sell-author" name="author" type="text" required maxlength="80" placeholder="e.g. Herbert Schildt, James Clear">
         </div>
         <div class="field">
           <label for="sell-edition">Edition</label>
-          <input id="sell-edition" name="edition" type="text" maxlength="40" placeholder="e.g. 12th Edition">
+          <input id="sell-edition" name="edition" type="text" maxlength="40" placeholder="e.g. 12th Edition / Paperback">
         </div>
         <div class="field">
-          <label for="sell-category">Category</label>
+          <label for="sell-category">Category *</label>
           <select id="sell-category" name="category" required></select>
         </div>
         <div class="field">
-          <label for="sell-branch">Branch / course</label>
+          <label for="sell-branch">Branch / Course</label>
           <select id="sell-branch" name="branch"></select>
+          <input type="text" id="sell-custom-branch" class="custom-other-input" placeholder="Type custom branch (e.g. AI/ML, Biotechnology)">
         </div>
         <div class="field">
-          <label for="sell-year">Year / semester</label>
+          <label for="sell-year">Year / Semester</label>
           <select id="sell-year" name="year"></select>
+          <input type="text" id="sell-custom-year" class="custom-other-input" placeholder="Type custom year/semester">
         </div>
         <div class="field">
-          <label for="sell-condition">Condition</label>
+          <label for="sell-condition">Condition *</label>
           <select id="sell-condition" name="condition" required></select>
         </div>
         <div class="field">
-          <label for="sell-price">Price (₹)</label>
-          <input id="sell-price" name="price" type="number" min="1" step="1" required>
+          <label for="sell-price">Price (₹) *</label>
+          <input id="sell-price" name="price" type="number" min="1" step="1" required placeholder="e.g. 350">
         </div>
         <div class="field">
-          <label for="sell-location">Location</label>
+          <label for="sell-location">Hyderabad Location *</label>
           <select id="sell-location" name="location" required></select>
+          <input type="text" id="sell-custom-location" class="custom-other-input" placeholder="Type custom location/area in Hyderabad">
         </div>
         <div class="field">
-          <label for="sell-description">Description</label>
-          <textarea id="sell-description" name="description" maxlength="1000" placeholder="Highlighting, missing pages, pickup notes…"></textarea>
+          <label for="sell-description">Description & Condition Notes</label>
+          <textarea id="sell-description" name="description" maxlength="1000" placeholder="Mention highlighting, syllabus compatibility, solved papers, pickup spot…"></textarea>
         </div>
         <div class="field">
-          <label for="sell-image">Book image</label>
+          <label for="sell-image">Book Photo (Optional)</label>
           <input id="sell-image" name="image" type="file" accept="image/*">
         </div>
         <div class="field">
-          <label for="sell-seller-name">Your name</label>
-          <input id="sell-seller-name" name="sellerName" type="text" required maxlength="60">
+          <label for="sell-seller-name">Your Name *</label>
+          <input id="sell-seller-name" name="sellerName" type="text" required maxlength="60" placeholder="e.g. Rahul Sharma">
         </div>
         <div class="field">
           <label for="sell-seller-email">Email</label>
-          <input id="sell-seller-email" name="sellerEmail" type="email" placeholder="optional for now">
+          <input id="sell-seller-email" name="sellerEmail" type="email" placeholder="e.g. rahul@student.example">
         </div>
         <div class="field">
-          <label for="sell-seller-contact">Phone / contact</label>
-          <input id="sell-seller-contact" name="sellerContact" type="text" maxlength="20">
+          <label for="sell-seller-contact">Phone / WhatsApp Contact</label>
+          <input id="sell-seller-contact" name="sellerContact" type="text" maxlength="20" placeholder="e.g. 9876543210">
         </div>
         <p class="error-text" id="sell-error"></p>
-        <button class="btn btn-clay btn-full" type="submit">Post listing</button>
+        <button class="btn btn-clay btn-full" type="submit">Post Listing</button>
       </form>
     </div>
   </main>
@@ -131,6 +134,35 @@
     </div>
     <div class="container"><p>© <span id="year"></span> BookLoop</p></div>
   </footer>
+
+  <!-- BookLoop AI Assistant Floating Widget -->
+  <div class="ai-chatbot-widget">
+    <button class="ai-toggle-btn" id="ai-toggle-btn" aria-label="Open BookLoop AI">
+      <span class="ai-pulse-dot"></span>
+      🤖 BookLoop AI
+    </button>
+    <div class="ai-chat-window" id="ai-chat-window">
+      <div class="ai-chat-header">
+        <div>
+          <h4>🤖 BookLoop Assistant</h4>
+        </div>
+        <button class="modal-close-btn" id="ai-close-btn" style="color:white;">&times;</button>
+      </div>
+      <div class="ai-chat-body" id="ai-chat-body">
+        <div class="ai-msg bot">
+          👋 Need help setting a price or describing your book condition? Ask me!
+          <div class="ai-quick-prompts">
+            <button type="button" class="ai-prompt-chip" data-prompt="How to price my book?">💰 Pricing tips</button>
+            <button type="button" class="ai-prompt-chip" data-prompt="What condition should I choose?">⭐ Condition guide</button>
+          </div>
+        </div>
+      </div>
+      <div class="ai-input-area">
+        <input type="text" id="ai-input" placeholder="Ask AI...">
+        <button class="ai-send-btn" id="ai-send-btn">Send</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/data.js"></script>
   <script src="js/api.js"></script>

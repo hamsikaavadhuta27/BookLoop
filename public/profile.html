@@ -33,23 +33,52 @@
 
   <main id="main">
     <div class="auth-wrap">
-      <div class="notice">You are not logged in. User accounts are a future backend feature.</div>
-      <h1>Your profile</h1>
-      <p>Later this page will show:</p>
+      <div class="notice">User accounts are a future backend feature. In this phase, favorite books and chats are saved in your browser.</div>
+      <h1>Your Profile</h1>
+      <p>In the next phase, this student dashboard will include:</p>
       <ul>
-        <li>Your name and pickup area</li>
-        <li>Books you listed for sale</li>
-        <li>Books you saved</li>
-        <li>Logout</li>
+        <li>Your profile details, verified college ID, and usual pickup spots</li>
+        <li>Active books you listed for sale</li>
+        <li>Saved / bookmarked textbooks</li>
+        <li>Active chat conversations with buyers and sellers</li>
       </ul>
-      <p class="muted">The Save button on listings already stores favourite IDs in this browser, only so you can practise the idea. It is not tied to an account.</p>
-      <p><a class="btn btn-primary" href="login.html">Go to login UI</a> <a class="btn btn-ghost" href="books.html">Browse Books</a></p>
+      <p class="muted">The Save and Message buttons on listings already work in this browser so you can test the peer-to-peer experience.</p>
+      <p style="margin-top: 18px;"><a class="btn btn-primary" href="books.html">Browse Books</a> <a class="btn btn-ghost" href="sell.html">Sell a Book</a></p>
     </div>
   </main>
 
   <footer class="site-footer">
     <div class="container"><p>© <span id="year"></span> BookLoop</p></div>
   </footer>
+
+  <!-- BookLoop AI Assistant Floating Widget -->
+  <div class="ai-chatbot-widget">
+    <button class="ai-toggle-btn" id="ai-toggle-btn" aria-label="Open BookLoop AI">
+      <span class="ai-pulse-dot"></span>
+      🤖 BookLoop AI
+    </button>
+    <div class="ai-chat-window" id="ai-chat-window">
+      <div class="ai-chat-header">
+        <div>
+          <h4>🤖 BookLoop Assistant</h4>
+        </div>
+        <button class="modal-close-btn" id="ai-close-btn" style="color:white;">&times;</button>
+      </div>
+      <div class="ai-chat-body" id="ai-chat-body">
+        <div class="ai-msg bot">
+          👋 Hi! Need help navigating BookLoop or finding books?
+          <div class="ai-quick-prompts">
+            <button type="button" class="ai-prompt-chip" data-prompt="Find books in Hyderabad">📍 Popular areas</button>
+            <button type="button" class="ai-prompt-chip" data-prompt="How do I sell a book?">📝 How to sell</button>
+          </div>
+        </div>
+      </div>
+      <div class="ai-input-area">
+        <input type="text" id="ai-input" placeholder="Ask AI...">
+        <button class="ai-send-btn" id="ai-send-btn">Send</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/data.js"></script>
   <script src="js/api.js"></script>

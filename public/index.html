@@ -39,13 +39,13 @@
           <h1>Give every book another loop.</h1>
           <p class="lead">Buy and sell used college books with students near Koti, Ameerpet, Madhapur, and more. Keep textbooks moving instead of stacking them in a cupboard.</p>
           <form class="search-box" id="home-search-form">
-            <input id="home-search-input" type="search" name="search" placeholder="Search by title or author, e.g. Java" aria-label="Search books">
+            <input id="home-search-input" type="search" name="search" placeholder="Search by title, author, branch or location..." aria-label="Search books">
             <button class="btn btn-primary" type="submit">Search</button>
           </form>
         </div>
         <aside class="hero-card">
           <h3>Built for campus life</h3>
-          <p class="muted">List a book with photo, condition, and pickup area. Another student finds it, checks the details, and contacts you.</p>
+          <p class="muted">List a book with photo, condition, and pickup area. Another student finds it, checks the details, and messages you directly.</p>
           <div class="stat-row">
             <div class="stat"><strong>Used books</strong><span>Fair prices</span></div>
             <div class="stat"><strong>Local pickup</strong><span>Hyderabad</span></div>
@@ -60,9 +60,15 @@
         <div class="section-head">
           <div>
             <h2>Browse categories</h2>
-            <p>Academic first, plus fiction and exam prep. More categories can be added later.</p>
+            <p>Academic coursework, competitive exams, novels, and self-help books.</p>
           </div>
           <a href="books.html">See all books</a>
+        </div>
+        <!-- Category Filter Tabs -->
+        <div class="category-tabs">
+          <button type="button" class="category-tab-btn active" data-type="All">All Categories</button>
+          <button type="button" class="category-tab-btn" data-type="academic">🎓 Academic & Engineering</button>
+          <button type="button" class="category-tab-btn" data-type="non-academic">📖 Non-Academic & Fiction</button>
         </div>
         <div class="category-grid" id="category-grid"></div>
       </div>
@@ -73,9 +79,9 @@
         <div class="section-head">
           <div>
             <h2>Recently added</h2>
-            <p>Fresh listings from students around the city.</p>
+            <p>Fresh listings from students around Hyderabad.</p>
           </div>
-          <a href="books.html">Browse Books</a>
+          <a href="books.html">Browse All Books</a>
         </div>
         <div class="book-grid" id="featured-grid"></div>
       </div>
@@ -86,7 +92,7 @@
         <div class="section-head">
           <div>
             <h2>Hyderabad pickup spots</h2>
-            <p>Filter books by the area where you can meet.</p>
+            <p>Find books available for exchange near your college or metro station.</p>
           </div>
         </div>
         <div class="location-grid" id="location-grid"></div>
@@ -98,7 +104,7 @@
         <div class="cta-banner">
           <div>
             <h2>Finished a semester?</h2>
-            <p>Pass the book on. Listing takes a few minutes.</p>
+            <p>Pass your books on to juniors. Free listing in minutes.</p>
           </div>
           <a class="btn" href="sell.html">Sell a Book</a>
         </div>
@@ -131,6 +137,57 @@
     </div>
     <div class="container"><p>© <span id="year"></span> BookLoop</p></div>
   </footer>
+
+  <!-- Private Chat Modal -->
+  <div class="modal-overlay" id="chat-modal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div>
+          <h3 id="chat-book-title">Chat with Seller</h3>
+          <p id="chat-seller-name" style="font-size: 0.8rem; color: var(--muted); margin: 2px 0 0;">Seller</p>
+        </div>
+        <button class="modal-close-btn" id="chat-close-btn">&times;</button>
+      </div>
+      <div class="chat-banner">
+        🔒 <strong>Private Message:</strong> Coordinate safe pickup and ask questions.
+      </div>
+      <div class="chat-messages" id="chat-messages-container"></div>
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Type a message to the seller...">
+        <button class="chat-send-btn" id="chat-send-btn">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BookLoop AI Assistant Floating Widget -->
+  <div class="ai-chatbot-widget">
+    <button class="ai-toggle-btn" id="ai-toggle-btn" aria-label="Open BookLoop AI">
+      <span class="ai-pulse-dot"></span>
+      🤖 BookLoop AI
+    </button>
+    <div class="ai-chat-window" id="ai-chat-window">
+      <div class="ai-chat-header">
+        <div>
+          <h4>🤖 BookLoop Assistant</h4>
+        </div>
+        <button class="modal-close-btn" id="ai-close-btn" style="color:white;">&times;</button>
+      </div>
+      <div class="ai-chat-body" id="ai-chat-body">
+        <div class="ai-msg bot">
+          👋 Hi! I can find books matching your budget, explain how to sell or buy, and recommend textbooks!
+          <div class="ai-quick-prompts">
+            <button type="button" class="ai-prompt-chip" data-prompt="Find CSE books under 400 in Kukatpally">💻 CSE under ₹400</button>
+            <button type="button" class="ai-prompt-chip" data-prompt="How do I sell a book?">📝 How to sell?</button>
+            <button type="button" class="ai-prompt-chip" data-prompt="Show fiction novels">📚 Fiction books</button>
+          </div>
+        </div>
+      </div>
+      <div class="ai-input-area">
+        <input type="text" id="ai-input" placeholder="Ask e.g. 'CSE book under 400'...">
+        <button class="ai-send-btn" id="ai-send-btn">Send</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/data.js"></script>
   <script src="js/api.js"></script>

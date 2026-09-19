@@ -67,6 +67,27 @@ const sampleBooks = [
     createdAt: new Date('2026-07-30')
   },
   {
+    title: 'Database System Concepts (DBMS)',
+    author: 'Silberschatz, Korth & Sudarshan',
+    edition: '7th Edition',
+    image: '/images/covers/dsa.svg',
+    category: 'B.Tech',
+    branch: 'CSE',
+    year: '2nd Year',
+    condition: 'Like New',
+    price: 400,
+    location: 'Kukatpally',
+    description:
+      'Standard text for database management, SQL queries, normalization, indexing, and transaction management.',
+    seller: {
+      name: 'Sneha Patel',
+      email: 'sneha.patel@student.example',
+      contact: '9000000013'
+    },
+    available: true,
+    createdAt: new Date('2026-08-20')
+  },
+  {
     title: 'Digital Electronics',
     author: 'R.P. Jain',
     edition: '4th Edition',
@@ -135,7 +156,7 @@ const sampleBooks = [
     edition: '4th Edition',
     image: '/images/covers/anatomy.svg',
     category: 'MBBS',
-    branch: 'General',
+    branch: 'Anatomy',
     year: '1st Year',
     condition: 'Like New',
     price: 650,
@@ -172,11 +193,74 @@ const sampleBooks = [
     createdAt: new Date('2026-08-01')
   },
   {
+    title: 'Bhagavad Gita As It Is',
+    author: 'A.C. Bhaktivedanta Swami Prabhupada',
+    edition: 'Hardcover',
+    image: '/images/placeholder.svg',
+    category: 'Devotional',
+    branch: '',
+    year: 'Not applicable',
+    condition: 'New',
+    price: 180,
+    location: 'Abids',
+    description:
+      'Hardbound English edition with original Sanskrit verses, transliterations, and elaborate purports.',
+    seller: {
+      name: 'Srinivas Rao',
+      email: 'srinivas.r@student.example',
+      contact: '9000000014'
+    },
+    available: true,
+    createdAt: new Date('2026-09-02')
+  },
+  {
+    title: 'The Adventures of Sherlock Holmes',
+    author: 'Arthur Conan Doyle',
+    edition: 'Collector\'s Edition',
+    image: '/images/placeholder.svg',
+    category: 'Mystery',
+    branch: '',
+    year: 'Not applicable',
+    condition: 'Good',
+    price: 150,
+    location: 'Dilsukhnagar',
+    description:
+      'Classic collection of 12 detective stories featuring Sherlock Holmes and Dr. John Watson.',
+    seller: {
+      name: 'Nikhil Joshi',
+      email: 'nikhil.j@student.example',
+      contact: '9000000015'
+    },
+    available: true,
+    createdAt: new Date('2026-09-03')
+  },
+  {
+    title: 'The Alchemist',
+    author: 'Paulo Coelho',
+    edition: 'Paperback',
+    image: '/images/placeholder.svg',
+    category: 'Fiction',
+    branch: '',
+    year: 'Not applicable',
+    condition: 'Like New',
+    price: 200,
+    location: 'Begumpet',
+    description:
+      'Inspiring journey of Santiago. Read once, paperback in immaculate condition.',
+    seller: {
+      name: 'Pooja Hegde',
+      email: 'pooja.h@student.example',
+      contact: '9000000016'
+    },
+    available: true,
+    createdAt: new Date('2026-09-04')
+  },
+  {
     title: 'Harry Potter and the Philosopher\'s Stone',
     author: 'J.K. Rowling',
     edition: 'Paperback',
     image: '/images/covers/potter.svg',
-    category: 'Fiction',
+    category: 'Fantasy',
     branch: '',
     year: 'Not applicable',
     condition: 'Good',

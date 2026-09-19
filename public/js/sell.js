@@ -9,30 +9,84 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const categorySelect = document.getElementById('sell-category');
   const branchSelect = document.getElementById('sell-branch');
+  const yearSelect = document.getElementById('sell-year');
+  const locationSelect = document.getElementById('sell-location');
+  const conditionSelect = document.getElementById('sell-condition');
+  
+  const customBranchInput = document.getElementById('sell-custom-branch');
+  const customYearInput = document.getElementById('sell-custom-year');
+  const customLocationInput = document.getElementById('sell-custom-location');
+
   const errorBox = document.getElementById('sell-error');
   const successBox = document.getElementById('sell-success');
   let imageData = '';
 
   try {
     const filters = await getFilters();
-    fillSelect(categorySelect, filters.data.categories.map((item) => item.name), 'Select category');
-    fillSelect(document.getElementById('sell-year'), filters.data.years, 'Select year / semester');
-    fillSelect(document.getElementById('sell-location'), filters.data.locations, 'Select location');
-    fillSelect(document.getElementById('sell-condition'), filters.data.conditions, 'Select condition');
     window.bookloopCategories = filters.data.categories;
+
+    // Populate Category dropdown with optgroups
+    if (categorySelect) {
+      categorySelect.innerHTML = '<option value="">Select category</option>';
+      const academicGroup = document.createElement('optgroup');
+      academicGroup.label = '── Educational / Academic ──';
+      const nonAcademicGroup = document.createElement('optgroup');
+      nonAcademicGroup.label = '── Non-Academic / General ──';
+
+      window.bookloopCategories.forEach((cat) => {
+        const opt = document.createElement('option');
+        opt.value = cat.name;
+        opt.textContent = cat.name;
+        if (cat.type === 'academic') {
+          academicGroup.appendChild(opt);
+        } else {
+          nonAcademicGroup.appendChild(opt);
+        }
+      });
+
+      categorySelect.appendChild(academicGroup);
+      categorySelect.appendChild(nonAcademicGroup);
+    }
+
+    fillSelect(yearSelect, filters.data.years, 'Select year / semester');
+    fillSelect(locationSelect, filters.data.locations, 'Select location');
+    fillSelect(conditionSelect, filters.data.conditions, 'Select condition');
   } catch (error) {
     errorBox.textContent = 'Could not load form options. Start the server and refresh.';
   }
 
-  categorySelect.addEventListener('change', () => {
-    const selected = (window.bookloopCategories || []).find((item) => item.name === categorySelect.value);
-    const branches = selected && selected.branches ? selected.branches : [];
-    fillSelect(branchSelect, branches, branches.length ? 'Select branch / course' : 'Not applicable');
-    branchSelect.disabled = branches.length === 0;
-    if (!branches.length) branchSelect.value = '';
-  });
+  if (categorySelect) {
+    categorySelect.addEventListener('change', () => {
+      const selected = (window.bookloopCategories || []).find((item) => item.name === categorySelect.value);
+      const branches = selected && selected.branches && selected.branches.length ? selected.branches : [];
+      if (branches.length > 0) {
+        fillSelect(branchSelect, branches, 'Select branch / course');
+        branchSelect.disabled = false;
+      } else {
+        fillSelect(branchSelect, ['Other'], 'Not applicable / Other');
+        branchSelect.disabled = false;
+      }
+      handleSellOtherFields();
+    });
+  }
 
-  document.getElementById('sell-image').addEventListener('change', (event) => {
+  function handleSellOtherFields() {
+    if (customBranchInput) {
+      customBranchInput.style.display = branchSelect && branchSelect.value === 'Other' ? 'block' : 'none';
+    }
+    if (customYearInput) {
+      customYearInput.style.display = yearSelect && yearSelect.value === 'Other' ? 'block' : 'none';
+    }
+    if (customLocationInput) {
+      customLocationInput.style.display = locationSelect && locationSelect.value === 'Other' ? 'block' : 'none';
+    }
+  }
+
+  branchSelect?.addEventListener('change', handleSellOtherFields);
+  yearSelect?.addEventListener('change', handleSellOtherFields);
+  locationSelect?.addEventListener('change', handleSellOtherFields);
+
+  document.getElementById('sell-image')?.addEventListener('change', (event) => {
     const file = event.target.files[0];
     imageData = '';
     if (!file) return;
@@ -52,16 +106,31 @@ document.addEventListener('DOMContentLoaded', async () => {
     event.preventDefault();
     errorBox.textContent = '';
 
+    let branchVal = branchSelect ? branchSelect.value : '';
+    if (branchVal === 'Other' && customBranchInput && customBranchInput.value.trim()) {
+      branchVal = customBranchInput.value.trim();
+    }
+
+    let yearVal = yearSelect ? yearSelect.value : '';
+    if (yearVal === 'Other' && customYearInput && customYearInput.value.trim()) {
+      yearVal = customYearInput.value.trim();
+    }
+
+    let locationVal = locationSelect ? locationSelect.value : '';
+    if (locationVal === 'Other' && customLocationInput && customLocationInput.value.trim()) {
+      locationVal = customLocationInput.value.trim();
+    }
+
     const payload = {
       title: document.getElementById('sell-title').value.trim(),
       author: document.getElementById('sell-author').value.trim(),
       edition: document.getElementById('sell-edition').value.trim(),
-      category: categorySelect.value,
-      branch: branchSelect.value,
-      year: document.getElementById('sell-year').value,
-      condition: document.getElementById('sell-condition').value,
+      category: categorySelect ? categorySelect.value : '',
+      branch: branchVal,
+      year: yearVal,
+      condition: conditionSelect ? conditionSelect.value : '',
       price: document.getElementById('sell-price').value,
-      location: document.getElementById('sell-location').value,
+      location: locationVal,
       description: document.getElementById('sell-description').value.trim(),
       image: imageData,
       sellerName: document.getElementById('sell-seller-name').value.trim(),
@@ -77,7 +146,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const fileInput = document.getElementById('sell-image');
-    if (fileInput.files[0] && !imageData) {
+    if (fileInput && fileInput.files[0] && !imageData) {
       errorBox.textContent = 'The image is still loading. Wait a second, then post again.';
       return;
     }
@@ -99,11 +168,11 @@ function validateSellForm(data) {
   if (!data.category) return 'Please choose a category.';
   if (!data.condition) return 'Please choose the condition.';
   if (!data.price || Number(data.price) < 1) return 'Please enter a price of at least ₹1.';
-  if (!data.location) return 'Please choose a location.';
+  if (!data.location) return 'Please choose or enter a location.';
   if (!data.sellerName) return 'Please enter your name.';
   if (data.sellerEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.sellerEmail)) {
     return 'Please enter a valid email, or leave it blank.';
   }
-  if (data.description.length > 1000) return 'Description should be under 1000 characters.';
+  if (data.description && data.description.length > 1000) return 'Description should be under 1000 characters.';
   return '';
 }

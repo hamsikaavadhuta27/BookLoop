@@ -33,29 +33,80 @@
 
   <main id="main">
     <div class="auth-wrap">
-      <div class="notice">Future backend feature: this form does not log you in. Passwords are not checked or stored. Real login will use Node.js and MongoDB later.</div>
+      <div class="notice">Future backend feature: this form is a design preview. Passwords are not checked or stored. Real login with Node.js and MongoDB will be connected in a later phase.</div>
       <h1>Login</h1>
-      <p class="muted">Accounts will let you manage listings, saved books, and chat.</p>
+      <p class="muted">Accounts will let you manage listings, saved books, and chat history.</p>
       <form id="login-form">
         <div class="field">
           <label for="login-email">Email</label>
-          <input id="login-email" type="email" autocomplete="username" required>
+          <input id="login-email" type="email" autocomplete="username" required placeholder="student@example.com">
         </div>
         <div class="field">
           <label for="login-password">Password</label>
-          <input id="login-password" type="password" autocomplete="current-password" required>
+          <input id="login-password" type="password" autocomplete="current-password" required placeholder="••••••••">
         </div>
         <p class="notice hidden" id="login-message"></p>
-        <button class="btn btn-primary btn-full" type="submit">Login (UI only)</button>
+        <button class="btn btn-primary btn-full" type="submit">Login (Preview)</button>
       </form>
-      <p>New here? <a href="signup.html">Create an account</a></p>
+      <p style="margin-top: 16px;">New here? <a href="signup.html">Create an account</a></p>
       <p><a href="profile.html">View profile page</a></p>
     </div>
   </main>
 
   <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h3>BookLoop</h3>
+        <p>Give every book another loop.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="books.html">Browse Books</a></li>
+          <li><a href="sell.html">Sell a Book</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Account</h3>
+        <ul>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="signup.html">Signup</a></li>
+          <li><a href="profile.html">Profile</a></li>
+        </ul>
+      </div>
+    </div>
     <div class="container"><p>© <span id="year"></span> BookLoop</p></div>
   </footer>
+
+  <!-- BookLoop AI Assistant Floating Widget -->
+  <div class="ai-chatbot-widget">
+    <button class="ai-toggle-btn" id="ai-toggle-btn" aria-label="Open BookLoop AI">
+      <span class="ai-pulse-dot"></span>
+      🤖 BookLoop AI
+    </button>
+    <div class="ai-chat-window" id="ai-chat-window">
+      <div class="ai-chat-header">
+        <div>
+          <h4>🤖 BookLoop Assistant</h4>
+        </div>
+        <button class="modal-close-btn" id="ai-close-btn" style="color:white;">&times;</button>
+      </div>
+      <div class="ai-chat-body" id="ai-chat-body">
+        <div class="ai-msg bot">
+          👋 Hi! Need help with your account, selling, or buying books?
+          <div class="ai-quick-prompts">
+            <button type="button" class="ai-prompt-chip" data-prompt="How do I sell a book?">📝 How to sell</button>
+            <button type="button" class="ai-prompt-chip" data-prompt="Find books in Koti">📍 Books in Koti</button>
+          </div>
+        </div>
+      </div>
+      <div class="ai-input-area">
+        <input type="text" id="ai-input" placeholder="Ask AI...">
+        <button class="ai-send-btn" id="ai-send-btn">Send</button>
+      </div>
+    </div>
+  </div>
 
   <script src="js/data.js"></script>
   <script src="js/api.js"></script>

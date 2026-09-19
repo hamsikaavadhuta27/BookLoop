@@ -1,7 +1,7 @@
 const Book = require('../models/Book');
 const { isDbConnected } = require('../config/db');
 const memoryStore = require('../data/memoryStore');
-const { conditions } = require('../data/catalog');
+const { conditions, categories } = require('../data/catalog');
 const asyncHandler = require('../middleware/asyncHandler');
 
 function toClientBook(book) {
@@ -34,25 +34,86 @@ function toClientBook(book) {
 
 function matchesFilters(book, query) {
   const search = (query.search || query.q || '').toLowerCase().trim();
-  const category = (query.category || '').trim();
-  const branch = (query.branch || '').trim();
-  const year = (query.year || '').trim();
-  const location = (query.location || '').trim();
-  const condition = (query.condition || '').trim();
+  const category = (query.category || '').trim().toLowerCase();
+  const categoryType = (query.type || '').trim().toLowerCase();
+  const branch = (query.branch || '').trim().toLowerCase();
+  const year = (query.year || '').trim().toLowerCase();
+  const location = (query.location || '').trim().toLowerCase();
+  const condition = (query.condition || '').trim().toLowerCase();
   const minPrice = query.minPrice !== undefined && query.minPrice !== '' ? Number(query.minPrice) : null;
   const maxPrice = query.maxPrice !== undefined && query.maxPrice !== '' ? Number(query.maxPrice) : null;
 
+  // Search across title, author, category, branch, location, and description
   if (search) {
-    const haystack = (book.title + ' ' + book.author).toLowerCase();
+    const haystack = [
+      book.title,
+      book.author,
+      book.category,
+      book.branch,
+      book.location,
+      book.description
+    ].filter(Boolean).join(' ').toLowerCase();
     if (!haystack.includes(search)) return false;
   }
-  if (category && book.category !== category) return false;
-  if (branch && book.branch !== branch) return false;
-  if (year && book.year !== year) return false;
-  if (location && book.location !== location) return false;
-  if (condition && book.condition !== condition) return false;
+
+  // Category type check (academic vs non-academic)
+  if (categoryType) {
+    const matchedCat = categories.find(c => c.name.toLowerCase() === (book.category || '').toLowerCase());
+    if (matchedCat && matchedCat.type.toLowerCase() !== categoryType) return false;
+  }
+
+  // Specific category check
+  if (category) {
+    if ((book.category || '').toLowerCase() !== category) {
+      // Also allow checking category type if category parameter equals 'academic' or 'non-academic'
+      if (category === 'academic' || category === 'non-academic') {
+        const matchedCat = categories.find(c => c.name.toLowerCase() === (book.category || '').toLowerCase());
+        if (!matchedCat || matchedCat.type.toLowerCase() !== category) return false;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  // Branch check
+  if (branch) {
+    if (branch === 'other') {
+      const customBranch = (query.customBranch || '').trim().toLowerCase();
+      if (customBranch && !(book.branch || '').toLowerCase().includes(customBranch)) return false;
+    } else {
+      if (!(book.branch || '').toLowerCase().includes(branch)) return false;
+    }
+  }
+
+  // Year check
+  if (year) {
+    if (year === 'other') {
+      const customYear = (query.customYear || '').trim().toLowerCase();
+      if (customYear && !(book.year || '').toLowerCase().includes(customYear)) return false;
+    } else {
+      if ((book.year || '').toLowerCase() !== year) return false;
+    }
+  }
+
+  // Location check
+  if (location) {
+    if (location === 'other') {
+      const customLocation = (query.customLocation || '').trim().toLowerCase();
+      if (customLocation && !(book.location || '').toLowerCase().includes(customLocation)) return false;
+    } else {
+      if ((book.location || '').toLowerCase() !== location) return false;
+    }
+  }
+
+  // Condition check
+  if (condition) {
+    if ((book.condition || '').toLowerCase() !== condition) return false;
+  }
+
+  // Min and Max price
   if (minPrice !== null && !Number.isNaN(minPrice) && book.price < minPrice) return false;
   if (maxPrice !== null && !Number.isNaN(maxPrice) && book.price > maxPrice) return false;
+
   return true;
 }
 
@@ -79,7 +140,9 @@ function validateBookInput(body, isUpdate) {
   }
   if (!isUpdate || body.condition !== undefined) {
     if (!condition) errors.push('Condition is required');
-    else if (!conditions.includes(condition)) errors.push('Choose a valid condition');
+    else if (!conditions.map(c => c.toLowerCase()).includes(condition.toLowerCase())) {
+      errors.push('Choose a valid condition');
+    }
   }
   if (!isUpdate || body.location !== undefined) {
     if (!location) errors.push('Location is required');
